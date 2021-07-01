@@ -5,7 +5,6 @@ import br.com.zupacademy.gustavo.casadocodigo.model.Autor;
 import br.com.zupacademy.gustavo.casadocodigo.repository.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

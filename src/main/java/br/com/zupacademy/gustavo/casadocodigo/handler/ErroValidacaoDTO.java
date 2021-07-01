@@ -1,18 +1,25 @@
 package br.com.zupacademy.gustavo.casadocodigo.handler;
 
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ErroValidacaoDTO {
 
     private LocalDateTime currentDate;
-    private String message;
+    private List<FieldError> message;
+    private List<ObjectError> messageList;
 
     public ErroValidacaoDTO(){
     }
 
-    public ErroValidacaoDTO(LocalDateTime currentDate, String message) {
+    public ErroValidacaoDTO(LocalDateTime currentDate, List<FieldError> message, List<ObjectError> messageList) {
         this.currentDate = currentDate;
         this.message = message;
+        this.messageList = messageList;
+
     }
 
     public LocalDateTime getCurrentDate() {
@@ -20,6 +27,6 @@ public class ErroValidacaoDTO {
     }
 
     public String getMessage() {
-        return message;
+        return message.toString();
     }
 }

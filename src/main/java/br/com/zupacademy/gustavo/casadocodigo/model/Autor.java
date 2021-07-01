@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class Autor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotNull @NotBlank @Column(nullable = false)
     private String nome;

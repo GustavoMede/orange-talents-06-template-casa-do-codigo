@@ -11,7 +11,7 @@ import java.util.Optional;
 public class EmailDuplicadoValidator implements ConstraintValidator<EmailDuplicado, String> {
 
     @Autowired
-    AutorRepository autorRepository;
+    private AutorRepository autorRepository;
 
     @Override
     public void initialize(EmailDuplicado constraintAnnotation) {
