@@ -9,8 +9,8 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {EmailDuplicadoValidator.class})
-public @interface EmailDuplicado {
+@Constraint(validatedBy = {CampoDuplicadoValidator.class})
+public @interface CampoDuplicado {
 
     String message();
 

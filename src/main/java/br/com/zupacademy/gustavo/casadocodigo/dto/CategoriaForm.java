@@ -1,7 +1,7 @@
 package br.com.zupacademy.gustavo.casadocodigo.dto;
 
 import br.com.zupacademy.gustavo.casadocodigo.model.Categoria;
-import br.com.zupacademy.gustavo.casadocodigo.validator.NomeDuplicado;
+import br.com.zupacademy.gustavo.casadocodigo.validator.CampoDuplicado;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import javax.validation.constraints.NotBlank;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 public class CategoriaForm {
 
-    @NotNull @NotBlank @NomeDuplicado(message = "O nome inserido já foi cadastrado")
+    @NotNull @NotBlank @CampoDuplicado(message = "O nome inserido já está cadastrado")
     private String nome;
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)

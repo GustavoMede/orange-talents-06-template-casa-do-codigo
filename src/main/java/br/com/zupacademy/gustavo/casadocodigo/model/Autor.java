@@ -1,7 +1,5 @@
 package br.com.zupacademy.gustavo.casadocodigo.model;
 
-import br.com.zupacademy.gustavo.casadocodigo.validator.EmailDuplicado;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
