@@ -23,10 +23,6 @@ public class Autor {
     @NotNull @Column(updatable = false)
     private LocalDateTime dataRegistro = LocalDateTime.now();
 
-    public Long getId() {
-        return id;
-    }
-
     public String getNome() {
         return nome;
     }

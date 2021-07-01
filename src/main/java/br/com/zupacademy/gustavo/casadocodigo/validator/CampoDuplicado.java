@@ -12,7 +12,11 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = {CampoDuplicadoValidator.class})
 public @interface CampoDuplicado {
 
-    String message();
+    String message() default "O valor do campo já foi cadastrado";
+
+    String fieldName();
+
+    Class<?> domainClass();
 
     Class<?>[] groups() default{};
 

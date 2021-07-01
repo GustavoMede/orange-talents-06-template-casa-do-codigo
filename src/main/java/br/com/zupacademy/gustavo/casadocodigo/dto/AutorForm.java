@@ -1,6 +1,7 @@
 package br.com.zupacademy.gustavo.casadocodigo.dto;
 
 import br.com.zupacademy.gustavo.casadocodigo.model.Autor;
+import br.com.zupacademy.gustavo.casadocodigo.model.Categoria;
 import br.com.zupacademy.gustavo.casadocodigo.validator.CampoDuplicado;
 
 import javax.validation.constraints.Email;
@@ -12,7 +13,7 @@ public class AutorForm {
 
     @NotNull @NotBlank
     private String nome;
-    @NotNull @NotBlank @Email @CampoDuplicado(message="O email informado já foi cadastrado.")
+    @NotNull @NotBlank @Email @CampoDuplicado(domainClass = Autor.class, fieldName = "email")
     private String email;
     @NotNull @NotBlank @Size(max = 400)
     private String descricao;

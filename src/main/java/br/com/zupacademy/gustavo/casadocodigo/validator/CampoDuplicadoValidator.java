@@ -1,34 +1,37 @@
 package br.com.zupacademy.gustavo.casadocodigo.validator;
 
-import br.com.zupacademy.gustavo.casadocodigo.model.Autor;
-import br.com.zupacademy.gustavo.casadocodigo.model.Categoria;
-import br.com.zupacademy.gustavo.casadocodigo.repository.AutorRepository;
-import br.com.zupacademy.gustavo.casadocodigo.repository.CategoriaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.Optional;
+import java.util.List;
 
-public class CampoDuplicadoValidator implements ConstraintValidator<CampoDuplicado, String> {
+public class CampoDuplicadoValidator implements ConstraintValidator<CampoDuplicado, Object> {
 
-    @Autowired
-    private AutorRepository autorRepository;
-    @Autowired
-    private CategoriaRepository categoriaRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    private String atributoDeDominio;
+
+    private Class<?> classe;
 
     @Override
     public void initialize(CampoDuplicado constraintAnnotation) {
-        ConstraintValidator.super.initialize(constraintAnnotation);
+        atributoDeDominio = constraintAnnotation.fieldName();
+        classe = constraintAnnotation.domainClass();
     }
 
     @Override
-    public boolean isValid(String s, ConstraintValidatorContext context) {
-        Optional<Autor> autor = autorRepository.findByEmail(s);
-        Optional<Categoria> categoria = categoriaRepository.findByNome(s);
-        if(autor.isPresent()){
-            return false;
-        }else return categoria.isEmpty();
+    public boolean isValid(Object objeto, ConstraintValidatorContext context) {
+        Query query = entityManager.createQuery("select 1 from " + classe.getName()+" where "+atributoDeDominio+"=:value");
+        query.setParameter("value", objeto);
+        List<?> lista = query.getResultList();
+        Assert.state(lista.size() <= 1, "O "+atributoDeDominio+" digitado já foi cadastrado no sistema.");
+
+        return lista.isEmpty();
     }
 }
 
