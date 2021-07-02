@@ -47,7 +47,18 @@ public class Livro {
         this.categoria = categoria;
     }
 
+    public Livro(){
+    }
+
     public void setDataPublicacao(LocalDate dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
     }
 }
