@@ -13,6 +13,8 @@ public class LivroForm {
     @NotBlank
     @CampoDuplicado(domainClass = Livro.class, fieldName = "titulo")
     private String titulo;
+    @NotNull @NotBlank
+    private String subtitulo;
     @NotNull
     @NotBlank
     @Size(max = 500)
@@ -35,8 +37,11 @@ public class LivroForm {
     @NotNull
     private String nomeCategoria;
 
-    public LivroForm(String titulo, String resumo, String sumario, Double preco, Integer paginas, String isbn, LocalDate dataPublicacao, String nomeAutor, String nomeCategoria) {
+    public LivroForm(String titulo, String resumo, String sumario, Double preco, Integer paginas,
+                     String isbn, LocalDate dataPublicacao, String nomeAutor, String nomeCategoria,
+                     String subtitulo) {
         this.titulo = titulo;
+        this.subtitulo = subtitulo;
         this.resumo = resumo;
         this.sumario = sumario;
         this.preco = preco;
@@ -49,6 +54,10 @@ public class LivroForm {
 
     public String getTitulo() {
         return titulo;
+    }
+
+    public String getSubtitulo() {
+        return subtitulo;
     }
 
     public String getResumo() {

@@ -1,6 +1,6 @@
 package br.com.zupacademy.gustavo.casadocodigo.controller;
 
-import br.com.zupacademy.gustavo.casadocodigo.dto.DetalhesLivro;
+import br.com.zupacademy.gustavo.casadocodigo.dto.LivroDTO;
 import br.com.zupacademy.gustavo.casadocodigo.dto.LivroForm;
 import br.com.zupacademy.gustavo.casadocodigo.model.Autor;
 import br.com.zupacademy.gustavo.casadocodigo.model.Categoria;
@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/livros")
@@ -35,7 +36,7 @@ public class LivroController {
         Categoria categoria = categoriaRepository.findByNome(form.getNomeCategoria());
 
         Livro livro = new Livro(form.getTitulo(), form.getResumo(), form.getSumario(), form.getPreco(),
-                form.getPaginas(), form.getIsbn(), form.getDataPublicacao(), autor, categoria);
+                form.getPaginas(), form.getIsbn(), form.getDataPublicacao(), form.getSubtitulo(), autor, categoria);
 
         livroRepository.save(livro);
 
@@ -43,10 +44,22 @@ public class LivroController {
     }
 
     @GetMapping("/lista")
-    public Page<DetalhesLivro> listaLivros(@PageableDefault(sort = "id", direction = Sort.Direction.ASC, page = 0, size = 10)Pageable paginacao){
+    public Page<LivroDTO> listaLivros(@PageableDefault(sort = "id", direction = Sort.Direction.ASC,
+            page = 0, size = 10)Pageable paginacao){
 
         Page<Livro> livros = livroRepository.findAll(paginacao);
 
-        return DetalhesLivro.converter(livros);
+        return LivroDTO.converter(livros);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> listaPorID(@PathVariable Long id){
+
+        Optional<Livro> livro = livroRepository.findById(id);
+        if(livro.isPresent()){
+            LivroDTO livroDTO = new LivroDTO(livro.get());
+            return ResponseEntity.ok(livro);
+        }
+        return ResponseEntity.notFound().build();
     }
 }
