@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -17,11 +18,12 @@ import java.util.List;
 public class ErroValidacaoHandler extends ResponseEntityExceptionHandler {
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        List<FieldError> descricaoErro = ex.getBindingResult().getFieldErrors();
-        List<ObjectError> descricaoErroObjects = ex.getBindingResult().getGlobalErrors();
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers,
+                                                                  HttpStatus status, WebRequest request) {
+        List<FieldError> descricaoErroCampos = ex.getBindingResult().getFieldErrors();
+        List<ObjectError> descricaoErroGlobais = ex.getBindingResult().getGlobalErrors();
 
-        ErroValidacaoDTO erro = new ErroValidacaoDTO(LocalDateTime.now(), descricaoErro, descricaoErroObjects);
+        ErroValidacaoDTO erro = new ErroValidacaoDTO(LocalDateTime.now(), descricaoErroCampos, descricaoErroGlobais);
         return new ResponseEntity<>(erro, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 }

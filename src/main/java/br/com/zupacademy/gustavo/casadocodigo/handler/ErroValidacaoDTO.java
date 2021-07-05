@@ -29,4 +29,8 @@ public class ErroValidacaoDTO {
     public String getMessage() {
         return message.toString();
     }
+
+    public List<ObjectError> getMessageList() {
+        return messageList;
+    }
 }
