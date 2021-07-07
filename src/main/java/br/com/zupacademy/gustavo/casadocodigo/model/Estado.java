@@ -10,10 +10,9 @@ public class Estado {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull
     @NotBlank
     private String nomeEstado;
-    @NotNull @NotBlank
+    @NotBlank
     private String nomePais;
 
     @NotNull

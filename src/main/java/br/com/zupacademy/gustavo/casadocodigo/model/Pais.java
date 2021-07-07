@@ -13,7 +13,7 @@ public class Pais {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull @NotBlank
+    @NotBlank
     private String nomePais;
 
     public Pais(){

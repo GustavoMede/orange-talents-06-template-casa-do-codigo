@@ -4,18 +4,18 @@ import br.com.zupacademy.gustavo.casadocodigo.model.Livro;
 import br.com.zupacademy.gustavo.casadocodigo.validator.CampoDuplicado;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.persistence.Column;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 public class LivroForm {
 
-    @NotNull
+    private Long id;
     @NotBlank
     @CampoDuplicado(domainClass = Livro.class, fieldName = "titulo")
     private String titulo;
-    @NotNull @NotBlank
+    @NotBlank
     private String subtitulo;
-    @NotNull
     @NotBlank
     @Size(max = 500)
     private String resumo;
@@ -25,7 +25,6 @@ public class LivroForm {
     private Double preco;
     @Min(100)
     private Integer paginas;
-    @NotNull
     @NotBlank
     @CampoDuplicado(domainClass = Livro.class, fieldName = "isbn")
     private String isbn;
@@ -37,9 +36,10 @@ public class LivroForm {
     @NotNull
     private String nomeCategoria;
 
-    public LivroForm(String titulo, String resumo, String sumario, Double preco, Integer paginas,
+    public LivroForm(Long id, String titulo, String resumo, String sumario, Double preco, Integer paginas,
                      String isbn, LocalDate dataPublicacao, String nomeAutor, String nomeCategoria,
                      String subtitulo) {
+        this.id = id;
         this.titulo = titulo;
         this.subtitulo = subtitulo;
         this.resumo = resumo;
@@ -50,6 +50,10 @@ public class LivroForm {
         this.dataPublicacao = dataPublicacao;
         this.nomeAutor = nomeAutor;
         this.nomeCategoria = nomeCategoria;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getTitulo() {

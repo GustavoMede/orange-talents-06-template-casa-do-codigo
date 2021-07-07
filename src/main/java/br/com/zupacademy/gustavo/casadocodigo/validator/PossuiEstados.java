@@ -9,10 +9,9 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {EstadoDuplicadoValidator.class})
-public @interface EstadoDuplicado {
-
-    String message() default "Esse Estado já foi cadastrado no País selecionado.";
+@Constraint(validatedBy = {PossuiEstadosValidator.class})
+public @interface PossuiEstados {
+    String message() default "Esse País possui estados, por favor, entre com algum estado existente.";
 
     Class<?> domainClass();
 

@@ -13,12 +13,12 @@ public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull @NotBlank @Column(nullable = false)
+    @NotBlank @Column(nullable = false)
     private String nome;
-    @NotNull @NotBlank @Email
+    @NotBlank @Email
     @Column(nullable = false)
     private String email;
-    @NotNull @NotBlank @Size(max = 400) @Column(length = 400)
+    @NotBlank @Size(max = 400) @Column(length = 400)
     private String descricao;
     @NotNull @Column(updatable = false)
     private LocalDateTime dataRegistro = LocalDateTime.now();

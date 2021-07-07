@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 public class PaisForm {
 
-    @NotNull @NotBlank @CampoDuplicado(domainClass = Pais.class, fieldName = "nomePais")
+    @NotBlank @CampoDuplicado(domainClass = Pais.class, fieldName = "nomePais")
     private String nomePais;
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)

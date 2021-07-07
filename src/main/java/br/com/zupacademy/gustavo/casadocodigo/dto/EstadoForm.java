@@ -6,12 +6,12 @@ import br.com.zupacademy.gustavo.casadocodigo.validator.EstadoDuplicado;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@EstadoDuplicado(domainClass = Estado.class, fieldName1 = "nomeEstado", fieldName2 = "nomePais")
+@EstadoDuplicado(domainClass = Estado.class)
 public class EstadoForm {
 
-    @NotNull @NotBlank
+    @NotBlank
     private String nomeEstado;
-    @NotNull @NotBlank
+    @NotBlank
     private String nomePais;
 
     public EstadoForm(String nomeEstado, String nomePais) {

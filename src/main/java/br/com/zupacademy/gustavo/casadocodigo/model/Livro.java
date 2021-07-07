@@ -13,18 +13,18 @@ public class Livro {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull @NotBlank
+    @NotBlank
     private String titulo;
-    @NotNull @NotBlank
+    @NotBlank
     private String subtitulo;
-    @NotNull @NotBlank @Size(max = 500)
+    @NotBlank @Size(max = 500)
     private String resumo;
     private String sumario;
     @NotNull @Min(20)
     private Double preco;
-    @Min(100)
+    @Min(100) @Column(length = 5000)
     private Integer paginas;
-    @NotNull @NotBlank
+    @NotBlank
     private String isbn;
     @Future
     @JsonFormat(pattern = "yyyy/MM/dd", shape = JsonFormat.Shape.STRING)
@@ -52,10 +52,6 @@ public class Livro {
     }
 
     public Livro(){
-    }
-
-    public void setDataPublicacao(LocalDate dataPublicacao) {
-        this.dataPublicacao = dataPublicacao;
     }
 
     public Long getId() {

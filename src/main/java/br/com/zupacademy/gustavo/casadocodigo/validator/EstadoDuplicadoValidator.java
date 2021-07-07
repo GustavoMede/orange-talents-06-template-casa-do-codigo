@@ -14,17 +14,8 @@ public class EstadoDuplicadoValidator implements ConstraintValidator<EstadoDupli
     @Autowired
     private EstadoRepository estadoRepository;
 
-    private String nomeEstado;
-
-    private String nomePais;
-
-    private Class<?> classe;
-
     @Override
     public void initialize(EstadoDuplicado constraintAnnotation) {
-        nomeEstado = constraintAnnotation.fieldName1();
-        nomePais = constraintAnnotation.fieldName2();
-        classe = constraintAnnotation.domainClass();
     }
 
     @Override

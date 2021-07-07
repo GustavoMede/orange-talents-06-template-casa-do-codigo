@@ -8,5 +8,7 @@ import java.util.Optional;
 
 public interface EstadoRepository extends JpaRepository<Estado, Long> {
 
+    Estado findByNomePaisAndNomeEstado(String nomePais, String nomeEstado);
+    Estado findByNomePais(String nomePais);
     Optional<Estado> findByNomeEstadoAndNomePais(String nomeEstado, String nomePais);
 }

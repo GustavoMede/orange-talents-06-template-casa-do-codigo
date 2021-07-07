@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 public class CategoriaForm {
 
-    @NotNull @NotBlank @CampoDuplicado(domainClass = Categoria.class, fieldName = "nome")
+    @NotBlank @CampoDuplicado(domainClass = Categoria.class, fieldName = "nome")
     private String nome;
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)

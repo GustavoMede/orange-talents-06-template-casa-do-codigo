@@ -11,11 +11,11 @@ import javax.validation.constraints.Size;
 
 public class AutorForm {
 
-    @NotNull @NotBlank
+    @NotBlank
     private String nome;
-    @NotNull @NotBlank @Email @CampoDuplicado(domainClass = Autor.class, fieldName = "email")
+    @NotBlank @Email @CampoDuplicado(domainClass = Autor.class, fieldName = "email")
     private String email;
-    @NotNull @NotBlank @Size(max = 400)
+    @NotBlank @Size(max = 400)
     private String descricao;
 
     public String getNome() {
