@@ -1,18 +1,22 @@
 package br.com.zupacademy.gustavo.casadocodigo.dto;
 
+import br.com.zupacademy.gustavo.casadocodigo.interfaces.Documento;
 import br.com.zupacademy.gustavo.casadocodigo.model.Cliente;
 import br.com.zupacademy.gustavo.casadocodigo.model.Estado;
 import br.com.zupacademy.gustavo.casadocodigo.model.Pais;
 import br.com.zupacademy.gustavo.casadocodigo.validator.CampoDuplicado;
+import br.com.zupacademy.gustavo.casadocodigo.validator.PossuiEstados;
+import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.persistence.ManyToOne;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Optional;
 
-public class ClienteDtoCpf{
+@PossuiEstados(domainClass = Estado.class)
+public class ClienteRequisicao {
 
     @NotBlank
     @Email
@@ -22,49 +26,27 @@ public class ClienteDtoCpf{
     private String nome;
     @NotBlank
     private String sobrenome;
-    @NotBlank @CPF @CampoDuplicado(domainClass = Cliente.class, fieldName = "cpf")
+    @Enumerated(EnumType.STRING)
+    private Documento documento;
+    @CPF @CampoDuplicado(domainClass = Cliente.class, fieldName = "valorDocumento")
     private String cpf;
+    @CNPJ @CampoDuplicado(domainClass = Cliente.class, fieldName = "valorDocumento")
+    private String cnpj;
     @NotBlank
     private String endereco;
     @NotBlank
     private String complemento;
     @NotBlank
     private String cidade;
-    @NotNull
-    private Pais pais;
-    private Estado estado;
+    @NotBlank
+    private String nomePais;
+    private String nomeEstado;
     @NotBlank
     private String telefone;
     @NotBlank
     private String cep;
 
-    public ClienteDtoCpf(String email, String nome, String sobrenome, String cpf, String endereco, String complemento,
-                         String cidade, Pais pais, Estado estado, String telefone, String cep) {
-        this.email = email;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.cpf = cpf;
-        this.endereco = endereco;
-        this.complemento = complemento;
-        this.cidade = cidade;
-        this.pais = pais;
-        this.estado = estado;
-        this.telefone = telefone;
-        this.cep = cep;
-    }
-
-    public ClienteDtoCpf(String email, String nome, String sobrenome, String cpf, String endereco,
-                         String complemento, String cidade, Pais pais, String telefone, String cep) {
-        this.email = email;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.cpf = cpf;
-        this.endereco = endereco;
-        this.complemento = complemento;
-        this.cidade = cidade;
-        this.pais = pais;
-        this.telefone = telefone;
-        this.cep = cep;
+    public ClienteRequisicao(){
     }
 
     public String getEmail() {
@@ -79,8 +61,16 @@ public class ClienteDtoCpf{
         return sobrenome;
     }
 
+    public Documento getDocumento() {
+        return documento;
+    }
+
     public String getCpf() {
         return cpf;
+    }
+
+    public String getCnpj() {
+        return cnpj;
     }
 
     public String getEndereco() {
@@ -95,12 +85,12 @@ public class ClienteDtoCpf{
         return cidade;
     }
 
-    public Pais getPais() {
-        return pais;
+    public String getNomePais() {
+        return nomePais;
     }
 
-    public Estado getEstado() {
-        return estado;
+    public String getNomeEstado() {
+        return nomeEstado;
     }
 
     public String getTelefone() {

@@ -1,6 +1,6 @@
 package br.com.zupacademy.gustavo.casadocodigo.validator;
 
-import br.com.zupacademy.gustavo.casadocodigo.dto.ClienteRequisicaoForm;
+import br.com.zupacademy.gustavo.casadocodigo.dto.ClienteRequisicao;
 import br.com.zupacademy.gustavo.casadocodigo.model.Estado;
 import br.com.zupacademy.gustavo.casadocodigo.model.Pais;
 import br.com.zupacademy.gustavo.casadocodigo.repository.EstadoRepository;
@@ -24,7 +24,7 @@ public class PossuiEstadosValidator implements ConstraintValidator<PossuiEstados
 
     @Override
     public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) {
-        var objeto = (ClienteRequisicaoForm) o;
+        var objeto = (ClienteRequisicao) o;
         String nomePais = objeto.getNomePais();
         String nomeEstado = objeto.getNomeEstado();
         Pais pais = paisRepository.findByNomePais(nomePais);

@@ -5,7 +5,6 @@ import br.com.zupacademy.gustavo.casadocodigo.validator.CampoDuplicado;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 public class PaisForm {
 

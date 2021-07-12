@@ -26,8 +26,8 @@ public class ErroValidacaoDTO {
         return currentDate;
     }
 
-    public String getMessage() {
-        return message.toString();
+    public List<FieldError> getMessage() {
+        return message;
     }
 
     public List<ObjectError> getMessageList() {

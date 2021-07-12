@@ -1,8 +1,6 @@
 package br.com.zupacademy.gustavo.casadocodigo.controller;
 
-import br.com.zupacademy.gustavo.casadocodigo.dto.ClienteDtoCnpj;
-import br.com.zupacademy.gustavo.casadocodigo.dto.ClienteDtoCpf;
-import br.com.zupacademy.gustavo.casadocodigo.dto.ClienteRequisicaoForm;
+import br.com.zupacademy.gustavo.casadocodigo.dto.ClienteRequisicao;
 import br.com.zupacademy.gustavo.casadocodigo.interfaces.Documento;
 import br.com.zupacademy.gustavo.casadocodigo.model.Cliente;
 import br.com.zupacademy.gustavo.casadocodigo.model.Estado;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/cliente")
@@ -32,20 +29,16 @@ public class ClienteController {
     private EstadoRepository estadoRepository;
 
     @PostMapping
-    public ResponseEntity<?> cadastra(@RequestBody @Valid ClienteRequisicaoForm form) {
-        Documento documentoEscolhido = form.getDocumento();
+    public ResponseEntity<?> cadastra(@RequestBody @Valid ClienteRequisicao request) {
+        Documento documentoEscolhido = request.getDocumento();
         if (documentoEscolhido == Documento.CPF) {
-            Pais pais = paisRepository.findByNomePais(form.getNomePais());
-            Estado estado = estadoRepository.findByNomePaisAndNomeEstado(form.getNomePais(), form.getNomeEstado());
+            Pais pais = paisRepository.findByNomePais(request.getNomePais());
+            Estado estado = estadoRepository.findByNomePaisAndNomeEstado(request.getNomePais(), request.getNomeEstado());
 
-            ClienteDtoCpf clienteDtoCpf = new ClienteDtoCpf(form.getEmail(), form.getNome(),
-                    form.getSobrenome(), form.getCpf(), form.getEndereco(), form.getComplemento(),
-                    form.getCidade(), pais, estado, form.getTelefone(), form.getCep());
-
-            Cliente cliente = new Cliente(clienteDtoCpf.getEmail(), clienteDtoCpf.getNome(),
-                    clienteDtoCpf.getSobrenome(), clienteDtoCpf.getCpf(), clienteDtoCpf.getEndereco(),
-                    clienteDtoCpf.getComplemento(), clienteDtoCpf.getCidade(), clienteDtoCpf.getPais(),
-                    clienteDtoCpf.getTelefone(), clienteDtoCpf.getCep());
+            Cliente cliente = new Cliente(request.getEmail(), request.getNome(),
+                    request.getSobrenome(), request.getCpf(), request.getEndereco(),
+                    request.getComplemento(), request.getCidade(), pais,
+                    request.getTelefone(), request.getCep());
 
             cliente.setEstado(estado);
 
@@ -54,18 +47,15 @@ public class ClienteController {
             return ResponseEntity.ok(cliente.getId());
         }
         if (documentoEscolhido == Documento.CNPJ) {
-            Pais pais = paisRepository.findByNomePais(form.getNomePais());
-            Estado estado = estadoRepository.findByNomePaisAndNomeEstado(form.getNomePais(), form.getNomeEstado());
+            Pais pais = paisRepository.findByNomePais(request.getNomePais());
+            Estado estado = estadoRepository.findByNomePaisAndNomeEstado(request.getNomePais(), request.getNomeEstado());
 
-            //Caso o país possuir estados é necessário entrar com um estado
-            ClienteDtoCnpj clienteDtoCnpj = new ClienteDtoCnpj(form.getEmail(), form.getNome(),
-                    form.getSobrenome(), form.getCnpj(), form.getEndereco(), form.getComplemento(),
-                    form.getCidade(), pais, estado, form.getTelefone(), form.getCep());
+            Cliente cliente = new Cliente(request.getEmail(), request.getNome(),
+                    request.getSobrenome(), request.getCnpj(), request.getEndereco(),
+                    request.getComplemento(), request.getCidade(), pais,
+                    request.getTelefone(), request.getCep());
 
-            Cliente cliente = new Cliente(clienteDtoCnpj.getEmail(), clienteDtoCnpj.getNome(),
-                    clienteDtoCnpj.getSobrenome(), clienteDtoCnpj.getCnpj(), clienteDtoCnpj.getEndereco(),
-                    clienteDtoCnpj.getComplemento(), clienteDtoCnpj.getCidade(), clienteDtoCnpj.getPais(),
-                    clienteDtoCnpj.getTelefone(), clienteDtoCnpj.getCep());
+            cliente.setEstado(estado);
 
             clienteRepository.save(cliente);
 
